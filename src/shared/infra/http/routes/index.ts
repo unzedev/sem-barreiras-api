@@ -1,10 +1,11 @@
 import { Router } from 'express';
 
-import authenticatedMiddleware from '../middlewares/AuthenticatedMiddleware';
+// import authenticatedMiddleware from '../middlewares/AuthenticatedMiddleware';
+
+import usersRoutes from '@modules/users/infra/http/routes/usersRoutes';
 
 const routes = Router();
 
-routes.use('/', (req, res) => res.json({ message: 'Hello World' }));
-routes.use(authenticatedMiddleware);
+routes.use('/users', usersRoutes);
 
 export default routes;

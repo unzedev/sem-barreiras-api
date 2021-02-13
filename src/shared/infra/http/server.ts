@@ -9,7 +9,7 @@ import { errors } from 'celebrate';
 import AppError from '@shared/errors/AppError';
 import routes from '@shared/infra/http/routes';
 import '@shared/infra/mongoose';
-// import '@shared/container';
+import '@shared/container';
 
 const app = express();
 app.use(cors());
