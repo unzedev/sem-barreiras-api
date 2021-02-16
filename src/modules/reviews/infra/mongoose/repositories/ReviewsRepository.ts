@@ -3,6 +3,7 @@ import { Model } from 'mongoose';
 import ICreateReviewDTO from '@modules/reviews/dtos/ICreateReview';
 import IReviewsRepository from '@modules/reviews/repositories/IReviewsRepository';
 
+import IListFilters from '@modules/reviews/dtos/IListFilters';
 import { ReviewDocument, Review } from '../schemas/Review';
 
 class ReviewsRepository implements IReviewsRepository {
@@ -32,6 +33,23 @@ class ReviewsRepository implements IReviewsRepository {
     });
 
     return reviews;
+  }
+
+  public async listWithFilters(
+    filters: IListFilters,
+  ): Promise<ReviewDocument[]> {
+    const reviews = await this.ormRepository.find(filters);
+
+    return reviews;
+  }
+
+  public async save(review: ReviewDocument): Promise<ReviewDocument> {
+    const updatedReview = await this.ormRepository.updateOne(
+      { _id: review.id },
+      review,
+    );
+
+    return updatedReview;
   }
 }
 

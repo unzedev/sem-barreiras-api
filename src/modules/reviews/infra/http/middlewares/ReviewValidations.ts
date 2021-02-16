@@ -24,4 +24,13 @@ export default class EstablishmentValidation {
       },
     });
   }
+
+  public list(): RequestHandler {
+    return celebrate({
+      [Segments.QUERY]: {
+        status: Joi.string().valid('pending', 'approved'),
+        establishment: Joi.string().alphanum().length(24),
+      },
+    });
+  }
 }

@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import CreateReviewService from '@modules/reviews/services/CreateReviewService';
 import FindReviewService from '@modules/reviews/services/FindReviewService';
 import UpdateRatingService from '@modules/reviews/services/UpdateEstablishmentRating';
+import ListReviewsService from '@modules/reviews/services/ListReviewsService';
 
 export default class ReviewsController {
   async create(request: Request, response: Response): Promise<Response> {
@@ -33,5 +34,15 @@ export default class ReviewsController {
     const review = await findReview.execute({ reviewId });
 
     return response.json(review);
+  }
+
+  async index(request: Request, response: Response): Promise<Response> {
+    const filters = request.query;
+
+    const listReviews = container.resolve(ListReviewsService);
+
+    const reviews = await listReviews.execute(filters);
+
+    return response.json(reviews);
   }
 }

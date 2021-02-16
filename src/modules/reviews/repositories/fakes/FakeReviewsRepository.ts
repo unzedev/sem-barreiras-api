@@ -3,6 +3,7 @@ import { ObjectId } from 'mongodb';
 import IReviewsRepository from '@modules/reviews/repositories/IReviewsRepository';
 import ICreateReviewDTO from '@modules/reviews/dtos/ICreateReview';
 
+import IListFilters from '@modules/reviews/dtos/IListFilters';
 import { ReviewDocument, Review } from '../../infra/mongoose/schemas/Review';
 
 class ReviewsRepository implements IReviewsRepository {
@@ -30,6 +31,22 @@ class ReviewsRepository implements IReviewsRepository {
     Object.assign(review, { id: new ObjectId() }, reviewData);
 
     this.reviews.push(review);
+
+    return review;
+  }
+
+  public async listWithFilters(
+    filters: IListFilters,
+  ): Promise<ReviewDocument[]> {
+    return this.reviews;
+  }
+
+  public async save(review: ReviewDocument): Promise<ReviewDocument> {
+    const findIndex = this.reviews.findIndex(
+      findReview => findReview.id === review.id,
+    );
+
+    this.reviews[findIndex] = review;
 
     return review;
   }

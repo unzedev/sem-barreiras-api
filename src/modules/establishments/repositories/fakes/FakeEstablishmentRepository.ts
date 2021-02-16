@@ -3,6 +3,7 @@ import { ObjectId } from 'mongodb';
 import IEstablishmentsRepository from '@modules/establishments/repositories/IEstablishmentRepository';
 import ICreateEstablishmentDTO from '@modules/establishments/dtos/ICreateEstablishment';
 
+import IListFilters from '@modules/establishments/dtos/IListFilters';
 import {
   EstablishmentDocument,
   Establishment,
@@ -41,6 +42,12 @@ class EstablishmentsRepository implements IEstablishmentsRepository {
     this.establishments[findIndex] = establishment;
 
     return establishment;
+  }
+
+  public async listWithFilters(
+    filters: IListFilters,
+  ): Promise<EstablishmentDocument[]> {
+    return this.establishments;
   }
 }
 

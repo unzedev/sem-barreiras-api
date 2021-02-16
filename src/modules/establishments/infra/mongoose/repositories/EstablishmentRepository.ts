@@ -3,6 +3,7 @@ import { Model } from 'mongoose';
 import ICreatestablishmentDTO from '@modules/establishments/dtos/ICreateEstablishment';
 import IEstablishmentsRepository from '@modules/establishments/repositories/IEstablishmentRepository';
 
+import IListFilters from '@modules/establishments/dtos/IListFilters';
 import { EstablishmentDocument, Establishment } from '../schemas/Establishment';
 
 class EstablishmentsRepository implements IEstablishmentsRepository {
@@ -35,6 +36,14 @@ class EstablishmentsRepository implements IEstablishmentsRepository {
     );
 
     return updatedEstablishment;
+  }
+
+  public async listWithFilters(
+    filters: IListFilters,
+  ): Promise<EstablishmentDocument[]> {
+    const establishments = await this.ormRepository.find(filters);
+
+    return establishments;
   }
 }
 
