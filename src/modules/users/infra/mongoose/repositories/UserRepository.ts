@@ -29,6 +29,15 @@ class UsersRepository implements IUsersRepository {
 
     return user;
   }
+
+  public async save(user: UserDocument): Promise<UserDocument> {
+    const updatedUser = await this.ormRepository.updateOne(
+      { _id: user.id },
+      user,
+    );
+
+    return updatedUser;
+  }
 }
 
 export default UsersRepository;

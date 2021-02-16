@@ -11,9 +11,17 @@ import EstablishmentsRepository from '@modules/establishments/infra/mongoose/rep
 import IReviewsRepository from '@modules/reviews/repositories/IReviewsRepository';
 import ReviewsRepository from '@modules/reviews/infra/mongoose/repositories/ReviewsRepository';
 
+import IUserTokensRepository from '@modules/users/repositories/IUserTokenRepository';
+import UserTokensRepository from '@modules/users/infra/mongoose/repositories/UserTokenRepository';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
+);
+
+container.registerSingleton<IUserTokensRepository>(
+  'UserTokensRepository',
+  UserTokensRepository,
 );
 
 container.registerSingleton<IEstablishmentsRepository>(
