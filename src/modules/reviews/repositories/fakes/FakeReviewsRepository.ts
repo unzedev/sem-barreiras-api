@@ -14,6 +14,16 @@ class ReviewsRepository implements IReviewsRepository {
     return findReview || null;
   }
 
+  public async listByEstablishment(
+    establishmentId: string,
+  ): Promise<ReviewDocument[]> {
+    const findReviews = this.reviews.filter(
+      review => review.establishment == establishmentId,
+    );
+
+    return findReviews;
+  }
+
   public async create(reviewData: ICreateReviewDTO): Promise<ReviewDocument> {
     const review = new Review();
 

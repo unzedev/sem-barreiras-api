@@ -23,6 +23,16 @@ class ReviewsRepository implements IReviewsRepository {
 
     return review;
   }
+
+  public async listByEstablishment(
+    establishmentId: string,
+  ): Promise<ReviewDocument[]> {
+    const reviews = await this.ormRepository.find({
+      establishment: establishmentId,
+    });
+
+    return reviews;
+  }
 }
 
 export default ReviewsRepository;

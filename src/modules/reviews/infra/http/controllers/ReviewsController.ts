@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 
 import CreateReviewService from '@modules/reviews/services/CreateReviewService';
 import FindReviewService from '@modules/reviews/services/FindReviewService';
+import UpdateRatingService from '@modules/reviews/services/UpdateEstablishmentRating';
 
 export default class ReviewsController {
   async create(request: Request, response: Response): Promise<Response> {
@@ -13,6 +14,12 @@ export default class ReviewsController {
     const review = await createReview.execute({
       user,
       ...request.body,
+    });
+
+    const updateRating = container.resolve(UpdateRatingService);
+
+    await updateRating.execute({
+      establishmentId: request.body.establishment,
     });
 
     return response.json(review);
