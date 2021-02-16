@@ -60,7 +60,6 @@ describe('FindEstablishment', () => {
       phone: '123123123123',
       title: 'title test',
       type: 'type test',
-      picture: 'pic test',
     });
   });
 

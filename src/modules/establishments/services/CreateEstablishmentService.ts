@@ -12,7 +12,6 @@ import IUsersRepository from '@modules/users/repositories/IUserRepository';
 import IEstablishmentsRepository from '../repositories/IEstablishmentRepository';
 
 interface Request {
-  picture?: string;
   accessibilities: Accessibilities[];
   cnpj: string;
   address: Address;

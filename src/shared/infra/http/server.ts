@@ -10,10 +10,12 @@ import AppError from '@shared/errors/AppError';
 import routes from '@shared/infra/http/routes';
 import '@shared/infra/mongoose';
 import '@shared/container';
+import UploadConfig from '@config/UploadConfig';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/files', express.static(UploadConfig.uploadsFolder));
 app.use(routes);
 app.use(errors());
 

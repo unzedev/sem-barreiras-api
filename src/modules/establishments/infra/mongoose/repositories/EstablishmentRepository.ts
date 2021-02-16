@@ -25,6 +25,17 @@ class EstablishmentsRepository implements IEstablishmentsRepository {
 
     return establishment;
   }
+
+  public async save(
+    establishment: EstablishmentDocument,
+  ): Promise<EstablishmentDocument> {
+    const updatedEstablishment = await this.ormRepository.updateOne(
+      { _id: establishment.id },
+      establishment,
+    );
+
+    return updatedEstablishment;
+  }
 }
 
 export default EstablishmentsRepository;

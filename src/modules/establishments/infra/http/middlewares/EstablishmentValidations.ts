@@ -5,7 +5,6 @@ export default class EstablishmentValidation {
   public post(): RequestHandler {
     return celebrate({
       [Segments.BODY]: {
-        picture: Joi.string().uri(),
         accessibilities: Joi.array()
           .items(
             Joi.object().keys({

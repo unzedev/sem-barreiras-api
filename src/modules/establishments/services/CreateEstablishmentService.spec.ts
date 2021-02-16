@@ -61,7 +61,6 @@ describe('CreateEstablishment', () => {
       phone: '123123123123',
       title: 'title test',
       type: 'type test',
-      picture: 'pic test',
     });
 
     expect(establishment).toHaveProperty('id');
@@ -95,7 +94,6 @@ describe('CreateEstablishment', () => {
       phone: '123123123123',
       title: 'title test',
       type: 'type test',
-      picture: 'pic test',
     });
 
     expect(establishment).rejects.toBeInstanceOf(AppError);

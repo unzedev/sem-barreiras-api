@@ -30,6 +30,18 @@ class EstablishmentsRepository implements IEstablishmentsRepository {
 
     return establishment;
   }
+
+  public async save(
+    establishment: EstablishmentDocument,
+  ): Promise<EstablishmentDocument> {
+    const findIndex = this.establishments.findIndex(
+      findEstablishment => findEstablishment.id === establishment.id,
+    );
+
+    this.establishments[findIndex] = establishment;
+
+    return establishment;
+  }
 }
 
 export default EstablishmentsRepository;

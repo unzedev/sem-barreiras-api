@@ -1,3 +1,4 @@
+import UploadConfig from '@config/UploadConfig';
 import { Document, model, Schema } from 'mongoose';
 
 export type Accessibilities = {
@@ -63,8 +64,24 @@ const establishmentSchema = new Schema(
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
   },
 );
+
+establishmentSchema.virtual('pictureUrl').get(function () {
+  if (!this.picture) {
+    return null;
+  }
+
+  switch (UploadConfig.driver) {
+    case 'disk':
+      return `http://localhost:${process.env.PORT}/files/${this.picture}`;
+    case 's3':
+      return `https://${UploadConfig.config.aws.bucket}.s3.amazonaws.com/${this.picture}`;
+    default:
+      return null;
+  }
+});
 
 export const Establishment = model<EstablishmentDocument>(
   'Establishment',

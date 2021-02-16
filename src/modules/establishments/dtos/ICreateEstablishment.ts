@@ -1,7 +1,6 @@
 import { Accessibilities } from '../infra/mongoose/schemas/Establishment';
 
 export default interface ICreateEstablishment {
-  picture?: string;
   accessibilities: Accessibilities[];
   cnpj: string;
   address: {
