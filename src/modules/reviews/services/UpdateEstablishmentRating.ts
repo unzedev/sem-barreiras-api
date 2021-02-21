@@ -38,7 +38,8 @@ class UpdateEstablishmentRating {
 
     const establishmentRating = sumAllRatings / establishmentReviews.length; // average rating
 
-    establishment.rating = establishmentRating;
+    establishment.rating =
+      establishmentReviews.length > 0 ? establishmentRating : 0;
 
     await this.establishmentsRepository.save(establishment);
   }

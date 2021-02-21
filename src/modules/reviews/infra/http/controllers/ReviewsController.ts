@@ -18,12 +18,6 @@ export default class ReviewsController {
       ...request.body,
     });
 
-    const updateRating = container.resolve(UpdateRatingService);
-
-    await updateRating.execute({
-      establishmentId: request.body.establishment,
-    });
-
     return response.json(review);
   }
 
@@ -51,11 +45,21 @@ export default class ReviewsController {
     const { clientId } = request;
     const { id: reviewId } = request.params;
 
+    const findReview = container.resolve(FindReviewService);
+
+    const review = await findReview.execute({ reviewId });
+
     const deleteReviews = container.resolve(DeleteReviewService);
 
     await deleteReviews.execute({
       clientId,
       reviewId,
+    });
+
+    const updateRating = container.resolve(UpdateRatingService);
+
+    await updateRating.execute({
+      establishmentId: review.establishment,
     });
 
     return response.send();
