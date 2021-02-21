@@ -4,6 +4,7 @@ import IEstablishmentsRepository from '@modules/establishments/repositories/IEst
 import ICreateEstablishmentDTO from '@modules/establishments/dtos/ICreateEstablishment';
 
 import IListFilters from '@modules/establishments/dtos/IListFilters';
+import IEstablishmentPagination from '@modules/establishments/dtos/IEstablishmentPagination';
 import {
   EstablishmentDocument,
   Establishment,
@@ -46,7 +47,7 @@ class EstablishmentsRepository implements IEstablishmentsRepository {
 
   public async listWithFilters(
     filters: IListFilters,
-  ): Promise<EstablishmentDocument[]> {
+  ): Promise<IEstablishmentPagination> {
     return this.establishments;
   }
 }

@@ -7,4 +7,5 @@ export default interface IAdminRepository {
   findByEmail(email: string): Promise<User | null>;
   create(data: ICreateUser): Promise<User>;
   save(user: User): Promise<User>;
+  list(): Promise<User[]>;
 }

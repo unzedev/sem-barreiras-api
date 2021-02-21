@@ -41,6 +41,8 @@ export default class EstablishmentValidation {
         type: Joi.string(),
         state: Joi.string(),
         city: Joi.string(),
+        offset: Joi.number().min(0),
+        limit: Joi.number().min(1),
       },
     });
   }

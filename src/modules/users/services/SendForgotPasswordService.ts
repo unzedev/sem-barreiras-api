@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
-import IMailProvider from '@shared/providers/MailProvider/models/IMailProvider';
+import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
 
 import IUsersRepository from '../repositories/IUserRepository';
 import IUserTokensRepository from '../repositories/IUserTokenRepository';
@@ -34,7 +34,7 @@ class SendForgotPassword {
 
     await this.mailProvider.sendMail(
       email,
-      `Pedido de recuperação de senha recebido: ${token}`,
+      `Pedido de recuperação de senha recebido: ${process.env.APP_URI}/recuperar?token=${token}`,
     );
   }
 }

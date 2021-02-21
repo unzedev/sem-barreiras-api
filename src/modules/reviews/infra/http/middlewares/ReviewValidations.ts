@@ -30,6 +30,8 @@ export default class EstablishmentValidation {
       [Segments.QUERY]: {
         status: Joi.string().valid('pending', 'approved'),
         establishment: Joi.string().alphanum().length(24),
+        offset: Joi.number().min(0),
+        limit: Joi.number().min(1),
       },
     });
   }

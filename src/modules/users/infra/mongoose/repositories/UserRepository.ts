@@ -38,6 +38,12 @@ class UsersRepository implements IUsersRepository {
 
     return updatedUser;
   }
+
+  public async list(): Promise<UserDocument[]> {
+    const users = await this.ormRepository.find({}, { password: 0 });
+
+    return users;
+  }
 }
 
 export default UsersRepository;

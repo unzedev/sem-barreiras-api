@@ -4,7 +4,7 @@ import AppError from '@shared/errors/AppError';
 import { UserDocument as User } from '@modules/users/infra/mongoose/schemas/User';
 import CreateUserService from '@modules/users/services/CreateUserService';
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUserRepository';
-import FakeHashProvider from '@shared/providers/HashProvider/fakes/FakeHashProvider';
+import FakeHashProvider from '@shared/container/providers/HashProvider/fakes/FakeHashProvider';
 
 import FindUserService from './FindUserService';
 

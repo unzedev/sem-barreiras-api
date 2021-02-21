@@ -6,7 +6,7 @@ import { EstablishmentDocument as Establishment } from '@modules/establishments/
 
 import CreateUserService from '@modules/users/services/CreateUserService';
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUserRepository';
-import FakeHashProvider from '@shared/providers/HashProvider/fakes/FakeHashProvider';
+import FakeHashProvider from '@shared/container/providers/HashProvider/fakes/FakeHashProvider';
 import CreateEstablishmentService from './CreateEstablishmentService';
 import FakeEstablishmentsRepositories from '../repositories/fakes/FakeEstablishmentRepository';
 

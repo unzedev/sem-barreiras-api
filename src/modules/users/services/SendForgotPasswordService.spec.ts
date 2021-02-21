@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 
 import AppError from '@shared/errors/AppError';
-import FakeMailProvider from '@shared/providers/MailProvider/fakes/FakeMailProvider';
+import FakeMailProvider from '@shared/container/providers/MailProvider/fakes/FakeMailProvider';
 import { UserDocument as User } from '../infra/mongoose/schemas/User';
 
 import SendForgotPasswordService from './SendForgotPasswordService';

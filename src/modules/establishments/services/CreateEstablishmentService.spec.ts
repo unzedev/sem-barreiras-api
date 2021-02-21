@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import AppError from '@shared/errors/AppError';
 
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUserRepository';
-import FakeHashRepository from '@shared/providers/HashProvider/fakes/FakeHashProvider';
+import FakeHashRepository from '@shared/container/providers/HashProvider/fakes/FakeHashProvider';
 import { UserDocument as User } from '@modules/users/infra/mongoose/schemas/User';
 
 import CreateUserService from '@modules/users/services/CreateUserService';

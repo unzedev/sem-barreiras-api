@@ -1,8 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
-import { EstablishmentDocument as Establishment } from '@modules/establishments/infra/mongoose/schemas/Establishment';
-
 import IEstablishmentsRepository from '@modules/establishments/repositories/IEstablishmentRepository';
+import IEstablishmentPagination from '../dtos/IEstablishmentPagination';
 
 interface Request {
   title?: string;
@@ -19,15 +18,19 @@ class ListEstablishments {
     private establishmentsRepository: IEstablishmentsRepository,
   ) {}
 
-  public async execute(filters: Request): Promise<Establishment[]> {
+  public async execute(filters: Request): Promise<IEstablishmentPagination> {
     if (filters.state) {
-      filters['address.state'] = filters.state;
+      filters['address.state'] = { $regex: new RegExp(filters.state, 'i') };
       delete filters.state;
     }
 
     if (filters.city) {
-      filters['address.city'] = filters.city;
+      filters['address.city'] = { $regex: new RegExp(filters.city, 'i') };
       delete filters.city;
+    }
+
+    if (filters.title) {
+      filters.title = { $regex: new RegExp(filters.title, 'i') };
     }
 
     const establishments = await this.establishmentsRepository.listWithFilters(

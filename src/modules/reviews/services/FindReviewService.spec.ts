@@ -7,7 +7,7 @@ import { ReviewDocument as Review } from '@modules/reviews/infra/mongoose/schema
 
 import CreateUserService from '@modules/users/services/CreateUserService';
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUserRepository';
-import FakeHashProvider from '@shared/providers/HashProvider/fakes/FakeHashProvider';
+import FakeHashProvider from '@shared/container/providers/HashProvider/fakes/FakeHashProvider';
 import CreateEstablishmentService from '@modules/establishments/services/CreateEstablishmentService';
 import FakeEstablishmentsRepositories from '@modules/establishments/repositories/fakes/FakeEstablishmentRepository';
 

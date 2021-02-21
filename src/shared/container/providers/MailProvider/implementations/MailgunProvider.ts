@@ -17,7 +17,7 @@ export default class EtherealMailProvider implements IMailProvider {
     const data = {
       to,
       text,
-      from: 'no-reply@unze.com.br',
+      from: 'sembarreiras@unze.com.br',
       subject: 'Recuperação de senha',
     };
 

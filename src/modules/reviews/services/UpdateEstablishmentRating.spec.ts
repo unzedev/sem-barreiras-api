@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import AppError from '@shared/errors/AppError';
 
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUserRepository';
-import FakeHashRepository from '@shared/providers/HashProvider/fakes/FakeHashProvider';
+import FakeHashRepository from '@shared/container/providers/HashProvider/fakes/FakeHashProvider';
 import { UserDocument as User } from '@modules/users/infra/mongoose/schemas/User';
 import { EstablishmentDocument as Establishment } from '@modules/establishments/infra/mongoose/schemas/Establishment';
 import FakeEstablishmentsRepository from '@modules/establishments/repositories/fakes/FakeEstablishmentRepository';

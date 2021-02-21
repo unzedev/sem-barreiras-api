@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 
 import AppError from '@shared/errors/AppError';
-import FakeHashProvider from '@shared/providers/HashProvider/fakes/FakeHashProvider';
+import FakeHashProvider from '@shared/container/providers/HashProvider/fakes/FakeHashProvider';
 
 import CreateUserService from './CreateUserService';
 import FakeUsersRepository from '../repositories/fakes/FakeUserRepository';

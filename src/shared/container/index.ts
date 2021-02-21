@@ -1,6 +1,6 @@
 import { container } from 'tsyringe';
 
-import '@shared/providers';
+import '@shared/container/providers';
 
 import IUsersRepository from '@modules/users/repositories/IUserRepository';
 import UsersRepository from '@modules/users/infra/mongoose/repositories/UserRepository';

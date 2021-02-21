@@ -4,4 +4,6 @@ export default interface IListFilters {
   type?: string;
   state?: string;
   status?: string;
+  limit?: number;
+  offset?: number;
 }

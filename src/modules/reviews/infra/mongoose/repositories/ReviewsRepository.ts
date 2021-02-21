@@ -4,6 +4,7 @@ import ICreateReviewDTO from '@modules/reviews/dtos/ICreateReview';
 import IReviewsRepository from '@modules/reviews/repositories/IReviewsRepository';
 
 import IListFilters from '@modules/reviews/dtos/IListFilters';
+import IReviewPagination from '@modules/reviews/dtos/IReviewPagination';
 import { ReviewDocument, Review } from '../schemas/Review';
 
 class ReviewsRepository implements IReviewsRepository {
@@ -20,7 +21,9 @@ class ReviewsRepository implements IReviewsRepository {
   }
 
   public async findById(_id: string): Promise<ReviewDocument | null> {
-    const review = await this.ormRepository.findOne({ _id });
+    const review = await this.ormRepository
+      .findOne({ _id })
+      .populate('user', ['name', 'email']);
 
     return review;
   }
@@ -36,11 +39,28 @@ class ReviewsRepository implements IReviewsRepository {
   }
 
   public async listWithFilters(
-    filters: IListFilters,
-  ): Promise<ReviewDocument[]> {
-    const reviews = await this.ormRepository.find(filters);
+    filtersList: IListFilters,
+  ): Promise<IReviewPagination> {
+    const { offset, limit, ...filters } = filtersList;
 
-    return reviews;
+    const providedOffset = offset || 0;
+    const providedLimit = limit || 10;
+
+    const total = await this.ormRepository.countDocuments();
+
+    const findReviews = await this.ormRepository
+      .find(filters)
+      .populate('user', ['name', 'email'])
+      .sort({ rating: -1 })
+      .skip(providedOffset)
+      .limit(providedLimit);
+
+    return {
+      reviews: findReviews,
+      limit: providedLimit,
+      offset: providedOffset,
+      total,
+    };
   }
 
   public async save(review: ReviewDocument): Promise<ReviewDocument> {

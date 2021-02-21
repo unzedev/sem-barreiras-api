@@ -37,6 +37,10 @@ class UsersRepository implements IUsersRepository {
 
     return user;
   }
+
+  public async list(): Promise<UserDocument[]> {
+    return this.users;
+  }
 }
 
 export default UsersRepository;

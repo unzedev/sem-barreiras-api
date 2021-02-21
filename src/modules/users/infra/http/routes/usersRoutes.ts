@@ -45,5 +45,6 @@ usersRoute.post(
 usersRoute.use(Authenticated);
 
 usersRoute.get('/me', usersController.get);
+usersRoute.get('/', usersController.index);
 
 export default usersRoute;

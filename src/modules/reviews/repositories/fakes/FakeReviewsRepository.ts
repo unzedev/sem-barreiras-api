@@ -4,6 +4,7 @@ import IReviewsRepository from '@modules/reviews/repositories/IReviewsRepository
 import ICreateReviewDTO from '@modules/reviews/dtos/ICreateReview';
 
 import IListFilters from '@modules/reviews/dtos/IListFilters';
+import IReviewPagination from '@modules/reviews/dtos/IReviewPagination';
 import { ReviewDocument, Review } from '../../infra/mongoose/schemas/Review';
 
 class ReviewsRepository implements IReviewsRepository {
@@ -37,7 +38,7 @@ class ReviewsRepository implements IReviewsRepository {
 
   public async listWithFilters(
     filters: IListFilters,
-  ): Promise<ReviewDocument[]> {
+  ): Promise<IReviewPagination> {
     return this.reviews;
   }
 

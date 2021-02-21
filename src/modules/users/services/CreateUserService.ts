@@ -2,7 +2,7 @@ import { inject, injectable } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 import { UserDocument as User } from '@modules/users/infra/mongoose/schemas/User';
-import IHashProvider from '@shared/providers/HashProvider/models/IHashProvider';
+import IHashProvider from '@shared/container/providers/HashProvider/models/IHashProvider';
 
 import IUsersRepository from '../repositories/IUserRepository';
 

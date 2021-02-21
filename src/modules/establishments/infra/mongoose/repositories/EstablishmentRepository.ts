@@ -4,6 +4,7 @@ import ICreatestablishmentDTO from '@modules/establishments/dtos/ICreateEstablis
 import IEstablishmentsRepository from '@modules/establishments/repositories/IEstablishmentRepository';
 
 import IListFilters from '@modules/establishments/dtos/IListFilters';
+import EstablishmentPagination from '@modules/establishments/dtos/IEstablishmentPagination';
 import { EstablishmentDocument, Establishment } from '../schemas/Establishment';
 
 class EstablishmentsRepository implements IEstablishmentsRepository {
@@ -39,11 +40,27 @@ class EstablishmentsRepository implements IEstablishmentsRepository {
   }
 
   public async listWithFilters(
-    filters: IListFilters,
-  ): Promise<EstablishmentDocument[]> {
-    const establishments = await this.ormRepository.find(filters);
+    filtersList: IListFilters,
+  ): Promise<EstablishmentPagination> {
+    const { offset, limit, ...filters } = filtersList;
 
-    return establishments;
+    const providedOffset = offset || 0;
+    const providedLimit = limit || 10;
+
+    const total = await this.ormRepository.countDocuments();
+
+    const findEstablishments = await this.ormRepository
+      .find(filters)
+      .sort({ rating: -1 })
+      .skip(providedOffset)
+      .limit(providedLimit);
+
+    return {
+      establishments: findEstablishments,
+      limit: providedLimit,
+      offset: providedOffset,
+      total,
+    };
   }
 }
 
