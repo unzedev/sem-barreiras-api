@@ -42,4 +42,6 @@ establishmentsRoute.patch(
 
 establishmentsRoute.post('/:id/approval', establishmentApprovalController.post);
 
+establishmentsRoute.delete('/:id', establishmentsController.delete);
+
 export default establishmentsRoute;

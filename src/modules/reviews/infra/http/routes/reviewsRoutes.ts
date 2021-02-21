@@ -21,4 +21,6 @@ reviewsRoute.post('/', reviewValidations.post(), reviewsController.create);
 
 reviewsRoute.post('/:id/approval', reviewsApprovalController.post);
 
+reviewsRoute.delete('/:id', reviewsController.delete);
+
 export default reviewsRoute;

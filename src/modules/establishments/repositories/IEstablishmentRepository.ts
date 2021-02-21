@@ -9,4 +9,5 @@ export default interface IEstablishmentRepository {
   create(data: ICreateEstablishment): Promise<Establishment>;
   save(establishment: Establishment): Promise<Establishment>;
   listWithFilters(filters: IListFilters): Promise<IEstablishmentPagination>;
+  delete(id: string): Promise<void>;
 }

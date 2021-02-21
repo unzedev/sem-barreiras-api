@@ -50,6 +50,14 @@ class EstablishmentsRepository implements IEstablishmentsRepository {
   ): Promise<IEstablishmentPagination> {
     return this.establishments;
   }
+
+  public async delete(_id: string): Promise<void> {
+    const findIndex = this.establishments.findIndex(
+      establishment => establishment.id === _id,
+    );
+
+    this.establishments.splice(findIndex, 1);
+  }
 }
 
 export default EstablishmentsRepository;

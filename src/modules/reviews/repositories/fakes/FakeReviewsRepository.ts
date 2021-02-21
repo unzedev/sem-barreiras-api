@@ -51,6 +51,12 @@ class ReviewsRepository implements IReviewsRepository {
 
     return review;
   }
+
+  public async delete(_id: string): Promise<void> {
+    const findIndex = this.reviews.findIndex(review => review.id === _id);
+
+    this.reviews.splice(findIndex, 1);
+  }
 }
 
 export default ReviewsRepository;

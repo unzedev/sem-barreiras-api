@@ -62,6 +62,10 @@ class EstablishmentsRepository implements IEstablishmentsRepository {
       total,
     };
   }
+
+  public async delete(_id: string): Promise<void> {
+    await this.ormRepository.deleteOne({ _id });
+  }
 }
 
 export default EstablishmentsRepository;

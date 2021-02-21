@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import CreateEstablishmentService from '@modules/establishments/services/CreateEstablishmentService';
 import FindEstablishmentService from '@modules/establishments/services/FindEstablishmentService';
 import ListEstablishmentService from '@modules/establishments/services/ListEstablishmentService';
+import DeleteEstablishmentService from '@modules/establishments/services/DeleteEstablishmentService';
 
 export default class EstablishmentsController {
   async create(request: Request, response: Response): Promise<Response> {
@@ -37,5 +38,19 @@ export default class EstablishmentsController {
     const establishments = await listEstablishments.execute(filters);
 
     return response.json(establishments);
+  }
+
+  async delete(request: Request, response: Response): Promise<Response> {
+    const { clientId } = request;
+    const { id: establishmentId } = request.params;
+
+    const deleteEstablishments = container.resolve(DeleteEstablishmentService);
+
+    await deleteEstablishments.execute({
+      clientId,
+      establishmentId,
+    });
+
+    return response.send();
   }
 }

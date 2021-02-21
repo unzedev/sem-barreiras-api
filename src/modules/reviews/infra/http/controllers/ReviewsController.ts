@@ -5,6 +5,7 @@ import CreateReviewService from '@modules/reviews/services/CreateReviewService';
 import FindReviewService from '@modules/reviews/services/FindReviewService';
 import UpdateRatingService from '@modules/reviews/services/UpdateEstablishmentRating';
 import ListReviewsService from '@modules/reviews/services/ListReviewsService';
+import DeleteReviewService from '@modules/reviews/services/DeleteReviewService';
 
 export default class ReviewsController {
   async create(request: Request, response: Response): Promise<Response> {
@@ -44,5 +45,19 @@ export default class ReviewsController {
     const reviews = await listReviews.execute(filters);
 
     return response.json(reviews);
+  }
+
+  async delete(request: Request, response: Response): Promise<Response> {
+    const { clientId } = request;
+    const { id: reviewId } = request.params;
+
+    const deleteReviews = container.resolve(DeleteReviewService);
+
+    await deleteReviews.execute({
+      clientId,
+      reviewId,
+    });
+
+    return response.send();
   }
 }
