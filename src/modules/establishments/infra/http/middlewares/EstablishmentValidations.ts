@@ -21,14 +21,14 @@ export default class EstablishmentValidation {
             street: Joi.string().required(),
             state: Joi.string().required(),
             number: Joi.number().min(1).required(),
-            complement: Joi.string(),
+            complement: Joi.string().allow(null).allow(''),
           })
           .required(),
         cnpj: Joi.string().length(14).required(),
         type: Joi.string().required(),
         title: Joi.string().required(),
-        link: Joi.string().uri(),
-        phone: Joi.string(),
+        link: Joi.string().uri().allow(null).allow(''),
+        phone: Joi.string().allow(null).allow(''),
       },
     });
   }
