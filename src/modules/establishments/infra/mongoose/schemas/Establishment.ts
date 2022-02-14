@@ -45,7 +45,7 @@ const establishmentSchema = new Schema(
         has: Boolean,
       },
     ],
-    cnpj: stringRequired,
+    cnpj: { type: String },
     address: {
       neighborhood: stringRequired,
       zipCode: stringRequired,
