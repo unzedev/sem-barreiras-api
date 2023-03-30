@@ -4,8 +4,8 @@ export default interface ICreateReview {
   accessibilities: Accessibilities[];
   comment: string;
   rating: number;
-  strengths: string;
-  weaknesses: string;
+  strengths?: string;
+  weaknesses?: string;
   title: string;
   establishment: string;
   user: string;
