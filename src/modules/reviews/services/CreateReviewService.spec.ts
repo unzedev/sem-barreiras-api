@@ -58,6 +58,7 @@ describe('CreateReview', () => {
         street: 'test street',
         zipCode: '123123',
         complement: 'complement test',
+        descricao: 'descricao',
       },
       cnpj: '213123',
       link: 'asdasd',

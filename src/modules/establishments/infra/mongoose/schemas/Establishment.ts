@@ -14,6 +14,7 @@ export type Address = {
   state: string;
   street: string;
   number: number;
+  descricao: string;
 };
 
 export type EstablishmentDocument = Document & {
@@ -54,6 +55,7 @@ const establishmentSchema = new Schema(
       state: stringRequired,
       street: stringRequired,
       number: { type: Number, required: true },
+      descricao: stringRequired,
     },
     link: String,
     status: { type: String, required: true, default: 'pending' },
