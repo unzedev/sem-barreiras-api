@@ -47,7 +47,7 @@ class EstablishmentsRepository implements IEstablishmentsRepository {
     const providedOffset = offset || 0;
     const providedLimit = limit || 10;
 
-    const total = await this.ormRepository.countDocuments();
+    const total = await this.ormRepository.countDocuments(filters);
 
     const findEstablishments = await this.ormRepository
       .find(filters)
