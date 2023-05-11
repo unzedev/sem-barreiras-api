@@ -3,6 +3,8 @@ import { Model } from 'mongoose';
 import ICreateUser from '@modules/users/dtos/ICreateUser';
 import IUsersRepository from '@modules/users/repositories/IUserRepository';
 
+import IListFilters from '@modules/users/dtos/IListFilters';
+import UserPagination from '@modules/users/dtos/IUserPagination';
 import { UserDocument, User } from '../schemas/User';
 
 class UsersRepository implements IUsersRepository {
@@ -44,6 +46,30 @@ class UsersRepository implements IUsersRepository {
 
     return users;
   }
+  
+  public async listWithFilters(
+    filtersList: IListFilters,
+  ): Promise<UserPagination> {
+    const { offset, limit, ...filters } = filtersList;
+
+    const providedOffset = offset || 0;
+    const providedLimit = limit || 10;
+
+    const total = await this.ormRepository.countDocuments(filters);
+
+    const findUsers = await this.ormRepository
+      .find(filters)
+      .sort({ rating: -1 })
+      .skip(providedOffset)
+      .limit(providedLimit);
+
+    return {
+      users: findUsers,
+      limit: providedLimit,
+      offset: providedOffset,
+      total,
+    };
+  }  
 }
 
 export default UsersRepository;
