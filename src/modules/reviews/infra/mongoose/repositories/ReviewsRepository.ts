@@ -46,7 +46,7 @@ class ReviewsRepository implements IReviewsRepository {
     const providedOffset = offset || 0;
     const providedLimit = limit || 10;
 
-    const total = await this.ormRepository.countDocuments();
+    const total = await this.ormRepository.countDocuments(filters);
 
     const findReviews = await this.ormRepository
       .find(filters)
