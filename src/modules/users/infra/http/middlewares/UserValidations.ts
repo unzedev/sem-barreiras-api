@@ -19,6 +19,9 @@ export default class UserValidation {
       [Segments.QUERY]: {
         offset: Joi.number().min(0),
         limit: Joi.number().min(1),
+        name: Joi.string(),
+        email: Joi.string(),
+        role: Joi.string(),
       },
     });
   }

@@ -8,6 +8,8 @@ import IUserPagination from '../dtos/IUserPagination';
 
 interface Request {
   name?: string;
+  email?: string;
+  role?: string;
 }
 
 @injectable()
@@ -25,8 +27,15 @@ class ListUsers {
     }
 
     if (filters.name) {
-      filters['name'] = { $regex: new RegExp(filters.name, 'i') };
-      delete filters.name;
+      filters.name = { $regex: new RegExp(filters.name, 'i') };
+    }
+
+    if (filters.email) {
+      filters.email = { $regex: new RegExp(filters.email, 'i') };
+    }
+
+    if (filters.role) {
+      filters.role = { $regex: new RegExp(filters.role, 'i') };
     }
 
     const users = await this.usersRepository.listWithFilters(filters);
