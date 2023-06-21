@@ -75,6 +75,10 @@ class ReviewsRepository implements IReviewsRepository {
   public async delete(_id: string): Promise<void> {
     await this.ormRepository.deleteOne({ _id });
   }
+
+  public async deleteByEstablishment(establishmentId: string): Promise<void> {
+    await this.ormRepository.deleteMany({ establishment: establishmentId });
+  }
 }
 
 export default ReviewsRepository;
