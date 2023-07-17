@@ -29,11 +29,13 @@ export default class UsersController {
   }
 
   async index(request: Request, response: Response): Promise<Response> {
-    const { clientId } = request;
+    const  clientId = request.clientId;
+
+    const filters = request.query;
 
     const listUsers = container.resolve(ListUserService);
 
-    const users = await listUsers.execute({ clientId });
+    const users = await listUsers.execute(filters,  clientId );
 
     return response.json(users);
   }

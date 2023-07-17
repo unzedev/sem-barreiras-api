@@ -4,6 +4,8 @@ import AppError from '@shared/errors/AppError';
 
 import IUsersRepository from '@modules/users/repositories/IUserRepository';
 import IEstablishmentsRepository from '../repositories/IEstablishmentRepository';
+import IReviewsRepository from '../../reviews/repositories/IReviewsRepository';
+
 
 interface Request {
   clientId: string;
@@ -18,6 +20,9 @@ class DeleteEstablishment {
 
     @inject('EstablishmentsRepository')
     private establishmentsRepository: IEstablishmentsRepository,
+
+    @inject('ReviewsRepository')
+    private reviewsRepository: IReviewsRepository,
   ) {}
 
   public async execute({ clientId, establishmentId }: Request): Promise<void> {
@@ -44,6 +49,7 @@ class DeleteEstablishment {
     }
 
     await this.establishmentsRepository.delete(establishment.id);
+    await this.reviewsRepository.deleteByEstablishment(establishment.id);
   }
 }
 
