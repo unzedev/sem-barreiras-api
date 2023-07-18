@@ -11,7 +11,7 @@ export default interface ICreateEstablishment {
     state: string;
     street: string;
     number: number;
-    descricao: string;
+    description: string;
   };
   link?: string;
   phone?: string;
