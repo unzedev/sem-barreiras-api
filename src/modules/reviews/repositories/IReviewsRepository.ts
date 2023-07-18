@@ -1,7 +1,7 @@
 import { ReviewDocument as Review } from '../infra/mongoose/schemas/Review';
 
 import ICreateReview from '../dtos/ICreateReview';
-import IListFilters from '../dtos/IListFilters';''
+import IListFilters from '../dtos/IListFilters';
 import IReviewPagination from '../dtos/IReviewPagination';
 
 export default interface IReviewRepository {
