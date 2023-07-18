@@ -10,7 +10,7 @@ services:
       - PORT=8080
       - APP_SECRET=test
       - STORAGE_DRIVER=disk
-      - MONGO_URI=mongodb+srv://integradora2:integradora2@cluster0.p5gphdq.mongodb.net/test
+      - MONGO_URI=mongodb://mongo:27017/sembarreiras
       - APP_URI=https://sembarreiras.unze.com.br
     container_name: sem-barreiras-app
     restart: always
