@@ -11,4 +11,5 @@ export default interface IReviewRepository {
   listWithFilters(filters: IListFilters): Promise<IReviewPagination>;
   save(review: Review): Promise<Review>;
   delete(id: string): Promise<void>;
+  deleteByEstablishment(establishmentId: string): Promise<void>;
 }

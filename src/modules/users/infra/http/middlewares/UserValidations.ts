@@ -14,4 +14,15 @@ export default class UserValidation {
       },
     });
   }
+  public list(): RequestHandler {
+    return celebrate({
+      [Segments.QUERY]: {
+        offset: Joi.number().min(0),
+        limit: Joi.number().min(1),
+        name: Joi.string(),
+        email: Joi.string(),
+        role: Joi.string(),
+      },
+    });
+  }
 }

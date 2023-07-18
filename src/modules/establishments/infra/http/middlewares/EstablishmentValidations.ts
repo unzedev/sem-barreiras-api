@@ -22,6 +22,7 @@ export default class EstablishmentValidation {
             state: Joi.string().required(),
             number: Joi.number().min(1).required(),
             complement: Joi.string().allow(null).allow(''),
+            description: Joi.string().allow(null).allow(''),
           })
           .required(),
         cnpj: Joi.string().length(14),
