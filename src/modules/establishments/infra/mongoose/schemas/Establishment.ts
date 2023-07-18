@@ -14,7 +14,7 @@ export type Address = {
   state: string;
   street: string;
   number: number;
-  descricao: string;
+  description: string;
 };
 
 export type EstablishmentDocument = Document & {
