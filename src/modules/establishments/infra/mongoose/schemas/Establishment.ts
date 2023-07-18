@@ -55,7 +55,7 @@ const establishmentSchema = new Schema(
       state: stringRequired,
       street: stringRequired,
       number: { type: Number, required: true },
-      descricao: stringRequired,
+      description: stringRequired,
     },
     link: String,
     status: { type: String, required: true, default: 'pending' },
