@@ -13,7 +13,12 @@ import '@shared/container';
 import UploadConfig from '@config/UploadConfig';
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.APP_URI,
+    credentials: true,
+  }),
+);
 app.use(express.json());
 app.use('/files', express.static(UploadConfig.uploadsFolder));
 app.use(routes);
