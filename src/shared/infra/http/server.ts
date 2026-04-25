@@ -13,9 +13,41 @@ import '@shared/container';
 import UploadConfig from '@config/UploadConfig';
 
 const app = express();
+const normalizeOrigin = (value: string): string => {
+  const origin = value.trim();
+
+  if (!origin) {
+    return '';
+  }
+
+  try {
+    return new URL(origin).origin;
+  } catch {
+    return origin.replace(/\/+$/, '');
+  }
+};
+
+const allowedOrigins = (process.env.APP_URI || '')
+  .split(',')
+  .map(normalizeOrigin)
+  .filter(Boolean);
+
 app.use(
   cors({
-    origin: process.env.APP_URI,
+    origin: (
+      origin: string | undefined,
+      callback: (error: Error | null, allow?: boolean) => void,
+    ) => {
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      if (allowedOrigins.includes(normalizeOrigin(origin))) {
+        return callback(null, true);
+      }
+
+      return callback(new Error('Origin not allowed by CORS'));
+    },
     credentials: true,
   }),
 );
