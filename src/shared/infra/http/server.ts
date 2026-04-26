@@ -32,6 +32,21 @@ const allowedOrigins = (process.env.APP_URI || '')
   .map(normalizeOrigin)
   .filter(Boolean);
 
+console.log(
+  `[BOOT] APP_URI raw="${process.env.APP_URI || ''}" allowedOrigins=${JSON.stringify(
+    allowedOrigins,
+  )}`,
+);
+
+app.use((request: Request, _response: Response, next: NextFunction) => {
+  console.log(
+    `[HTTP] ${request.method} ${request.originalUrl} origin="${
+      request.headers.origin || ''
+    }" userAgent="${request.headers['user-agent'] || ''}"`,
+  );
+  return next();
+});
+
 app.use(
   cors({
     origin: (
@@ -39,13 +54,22 @@ app.use(
       callback: (error: Error | null, allow?: boolean) => void,
     ) => {
       if (!origin) {
+        console.log('[CORS] allow request without origin header');
         return callback(null, true);
       }
 
-      if (allowedOrigins.includes(normalizeOrigin(origin))) {
+      const normalizedOrigin = normalizeOrigin(origin);
+
+      if (allowedOrigins.includes(normalizedOrigin)) {
+        console.log(`[CORS] allow origin="${origin}" normalized="${normalizedOrigin}"`);
         return callback(null, true);
       }
 
+      console.log(
+        `[CORS] reject origin="${origin}" normalized="${normalizedOrigin}" allowedOrigins=${JSON.stringify(
+          allowedOrigins,
+        )}`,
+      );
       return callback(new Error('Origin not allowed by CORS'));
     },
     credentials: true,
@@ -58,6 +82,12 @@ app.use(errors());
 
 app.use(
   (error: Error, request: Request, response: Response, _: NextFunction) => {
+    console.log(
+      `[ERROR] ${request.method} ${request.originalUrl} origin="${
+        request.headers.origin || ''
+      }" message="${error.message}"`,
+    );
+
     if (error instanceof AppError) {
       return response.status(error.statusCode).json({
         status: 'error',
