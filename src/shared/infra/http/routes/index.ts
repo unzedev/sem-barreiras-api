@@ -8,6 +8,10 @@ import reviewsRoutes from '@modules/reviews/infra/http/routes/reviewsRoutes';
 
 const routes = Router();
 
+routes.get('/health', (_request, response) => {
+  return response.status(200).json({ status: 'ok' });
+});
+
 routes.use('/users', usersRoutes);
 routes.use('/establishments', establishmentsRoutes);
 routes.use('/reviews', reviewsRoutes);
